@@ -1,16 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EmployeeService } from '../service/employee.service';
-import { DialogRef } from '@angular/cdk/dialog';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-modal',
   templateUrl: './employee-modal.component.html',
-  styleUrls: ['./employee-modal.component.scss']
+  styleUrls: ['./employee-modal.component.scss'],
 })
 export class EmployeeModalComponent implements OnInit {
-
   employeeForm: FormGroup;
 
   departments: string[] = [
@@ -18,10 +17,16 @@ export class EmployeeModalComponent implements OnInit {
     'Quality Assurance',
     'Business Analysts',
     'Project Manager',
-    'Human Resource'
+    'Human Resource',
   ];
 
-  constructor(private _fb: FormBuilder, private _http: EmployeeService, private _dialogRef: DialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(
+    private _fb: FormBuilder,
+    private _http: EmployeeService,
+    private _dialogRef: MatDialogRef<EmployeeModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private toastr: ToastrService
+  ) {
     this.employeeForm = this._fb.group({
       firstName: '',
       lastName: '',
@@ -30,7 +35,7 @@ export class EmployeeModalComponent implements OnInit {
       gender: '',
       companyName: '',
       department: '',
-      yearsOfExperience: ''
+      yearsOfExperience: '',
     });
   }
 
@@ -44,28 +49,28 @@ export class EmployeeModalComponent implements OnInit {
     console.log(this.employeeForm.getRawValue());
 
     if (this.data) {
-      this._http.updateEmployee(this.employeeForm.getRawValue(), this.data.id)
-      .subscribe({
-        next: () => {
-          alert('Employee Updated!');
-          this._dialogRef.close(true);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      })
-    } else {
-      if (this.employeeForm.valid) {
-        this._http.addEmployee(this.employeeForm.getRawValue())
+      this._http
+        .updateEmployee(this.employeeForm.getRawValue(), this.data.id)
         .subscribe({
           next: () => {
-            alert('Employee Created!');
+            this.toastr.success('Employee has been updated!', 'Success!');
             this._dialogRef.close(true);
           },
           error: (error) => {
-            console.log(error);
-          }
-        })
+            this.toastr.error(error, 'Oh no!');
+          },
+        });
+    } else {
+      if (this.employeeForm.valid) {
+        this._http.addEmployee(this.employeeForm.getRawValue()).subscribe({
+          next: () => {
+            this.toastr.success('New employee has been created!', 'Success!');
+            this._dialogRef.close(true);
+          },
+          error: (error) => {
+            this.toastr.error(error, 'Oh no!');
+          },
+        });
       }
     }
   }
@@ -73,5 +78,4 @@ export class EmployeeModalComponent implements OnInit {
   closeDialog() {
     this._dialogRef.close();
   }
-
 }

@@ -18,28 +18,6 @@
   },
   "employees": [
     {
-      "firstName": "Randolph",
-      "lastName": "Dy",
-      "email": "dope@gmail.com",
-      "dateOfBirth": "2023-08-07T16:00:00.000Z",
-      "gender": "male",
-      "companyName": "Talino",
-      "department": "Quality Assurance",
-      "yearsOfExperience": 5,
-      "id": 1
-    },
-    {
-      "firstName": "Randolph",
-      "lastName": "Mayson",
-      "email": "dope@mail.com",
-      "dateOfBirth": "2023-08-01T16:00:00.000Z",
-      "gender": "male",
-      "companyName": "Exist",
-      "department": "Human Resource",
-      "yearsOfExperience": 4,
-      "id": 3
-    },
-    {
       "firstName": "Lebron",
       "lastName": "James",
       "email": "Lbj@mail.com",
@@ -47,8 +25,30 @@
       "gender": "male",
       "companyName": "NBA",
       "department": "Project Manager",
-      "yearsOfExperience": 10,
+      "yearsOfExperience": 5,
       "id": 4
+    },
+    {
+      "firstName": "Samantha",
+      "lastName": "Blaise",
+      "email": "samantha@gmail.com",
+      "dateOfBirth": "1998-07-19T16:00:00.000Z",
+      "gender": "female",
+      "companyName": "Google",
+      "department": "Business Analysts",
+      "yearsOfExperience": 2,
+      "id": 5
+    },
+    {
+      "firstName": "Ricky",
+      "lastName": "Rubio",
+      "email": "rr09@mail.com",
+      "dateOfBirth": "1993-09-14T16:00:00.000Z",
+      "gender": "male",
+      "companyName": "Fiba",
+      "department": "Human Resource",
+      "yearsOfExperience": 3,
+      "id": 6
     }
   ]
 }

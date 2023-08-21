@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LottieAnimationComponent } from './lottie-animation/lottie-animation.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeModalComponent } from '../employee-modal/employee-modal.component';
 import { EmployeeService } from '../service/employee.service';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Employee {
   id?: string;
@@ -19,7 +20,7 @@ export interface Employee {
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.scss']
+  styleUrls: ['./employees.component.scss'],
 })
 export class EmployeesComponent implements OnInit {
   employeeList: Employee[] = [];
@@ -33,11 +34,15 @@ export class EmployeesComponent implements OnInit {
     'companyName',
     'department',
     'yearsOfExperience',
-    'action'
+    'action',
   ];
   dataSource: MatTableDataSource<Employee>;
 
-  constructor(private _dialog: MatDialog, private _http: EmployeeService) {
+  constructor(
+    private _dialog: MatDialog,
+    private _http: EmployeeService,
+    private toastr: ToastrService
+  ) {
     this.dataSource = new MatTableDataSource();
   }
 
@@ -46,17 +51,15 @@ export class EmployeesComponent implements OnInit {
   }
 
   getEmployeeList() {
-    this._http.getEmployeeList()
-    .subscribe({
+    this._http.getEmployeeList().subscribe({
       next: (response) => {
-        console.log(response);
         this.employeeList = response;
         this.dataSource = new MatTableDataSource(this.employeeList);
       },
       error: (error) => {
-        console.log(error);
-      }
-    })
+        this.toastr.error(error, 'Oh no!');
+      },
+    });
   }
 
   onAddEmployee() {
@@ -66,13 +69,13 @@ export class EmployeesComponent implements OnInit {
         if (result) {
           this.getEmployeeList();
         }
-      }
-    })
+      },
+    });
   }
 
   onUpdate(employeeData: Employee) {
     const dialogRef = this._dialog.open(EmployeeModalComponent, {
-      data: employeeData
+      data: employeeData,
     });
     dialogRef.afterClosed().subscribe({
       next: (result) => {
@@ -80,21 +83,20 @@ export class EmployeesComponent implements OnInit {
         if (result) {
           this.getEmployeeList();
         }
-      }
-    })
+      },
+    });
   }
 
   onDelete(id: string) {
-    this._http.deleteEmployee(id)
-    .subscribe({
+    this._http.deleteEmployee(id).subscribe({
       next: () => {
-        alert('Deleted');
+        this.toastr.success('Employee has been removed.', 'Deleted!');
         this.getEmployeeList();
       },
-      error: () => {
-
-      }
-    })
+      error: (error) => {
+        this.toastr.error(error, 'Oh no!');
+      },
+    });
   }
 
   applyFilter(event: Event) {
