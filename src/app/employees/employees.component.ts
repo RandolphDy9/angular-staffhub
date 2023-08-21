@@ -52,8 +52,8 @@ export class EmployeesComponent implements OnInit {
 
   getEmployeeList() {
     this._http.getEmployeeList().subscribe({
-      next: (response) => {
-        this.employeeList = response;
+      next: (response: any) => {
+        this.employeeList = response.employees;
         this.dataSource = new MatTableDataSource(this.employeeList);
       },
       error: (error) => {
