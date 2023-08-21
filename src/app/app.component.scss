@@ -1,0 +1,24 @@
+#app {
+  background-color: #d5fefd;
+  background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.content-container {
+  margin: 4rem;
+}
+
+.links {
+  display: flex;
+  margin: 0 1rem;
+}
+
+.footer{
+  text-align: center;
+  font-size: 14px;
+}

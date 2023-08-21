@@ -1,0 +1,32 @@
+<div class="hero row">
+  <div class="lottie-container">
+    <app-lottie-animation></app-lottie-animation>
+  </div>
+  <div class="hero-container">
+    <h1 class="header">Introducing StaffHub: Simplify Employee Management</h1>
+    <p class="subheader">
+      Discover the ultimate solution for effortless employee management with
+      StaffHub. Our user-friendly system lets you seamlessly add, edit,
+      delete, and update staff information in a snap. No more complex
+      spreadsheets or endless paperwork.
+    </p>
+    <p class="subheader">Key Features:</p>
+    <div class="row-card">
+      <div class="card"><mat-icon color="primary">check_circle</mat-icon><b>Effortless Data Management</b></div>
+      <div class="card"><mat-icon color="primary">check_circle</mat-icon><b>Simplified Editing</b></div>
+    </div>
+    <div class="row-card">
+      <div class="card"><mat-icon color="primary">check_circle</mat-icon><b>Streamlined Deletion</b></div>
+      <div class="card"><mat-icon color="primary">check_circle</mat-icon><b>Real-time Updates</b></div>
+    </div>
+    <div class="hero-action">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="toEmployeesPage()"
+      >
+        Manage Employees
+      </button>
+    </div>
+  </div>
+</div>
