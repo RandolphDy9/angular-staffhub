@@ -21,22 +21,22 @@ export class EmployeeService {
   constructor(private _http: HttpClient) {}
 
   addEmployee(data: Employee): Observable<Employee> {
-    return this._http.post<Employee>('https://raw.githubusercontent.com/RandolphDy9/angular-staffhub/main/db.json', data);
+    return this._http.post<Employee>('https://staffhub-backend.onrender.com/api/employee', data);
   }
 
   getEmployeeList(): Observable<Employee[]> {
-    return this._http.get<Employee[]>('https://raw.githubusercontent.com/RandolphDy9/angular-staffhub/main/db.json');
+    return this._http.get<Employee[]>('https://staffhub-backend.onrender.com/api/employee');
   }
 
   getEmployee(id: string): Observable<Employee> {
-    return this._http.get<Employee>(`https://raw.githubusercontent.com/RandolphDy9/angular-staffhub/main/db.json${id}`);
+    return this._http.get<Employee>(`https://staffhub-backend.onrender.com/api/employee/${id}`);
   }
 
   updateEmployee(data: Employee, id: string): Observable<Employee> {
-    return this._http.put<Employee>(`https://raw.githubusercontent.com/RandolphDy9/angular-staffhub/main/db.json/${id}`, data);
+    return this._http.put<Employee>(`https://staffhub-backend.onrender.com/api/employee/${id}`, data);
   }
 
   deleteEmployee(id: string): Observable<Employee> {
-    return this._http.delete<Employee>(`https://raw.githubusercontent.com/RandolphDy9/angular-staffhub/main/db.json/${id}`);
+    return this._http.delete<Employee>(`https://staffhub-backend.onrender.com/api/employee/${id}`);
   }
 }
