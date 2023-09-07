@@ -47,10 +47,11 @@ export class EmployeeModalComponent implements OnInit {
 
   onSubmitForm() {
     console.log(this.employeeForm.getRawValue());
+    console.log(this.data);
 
     if (this.data) {
       this._http
-        .updateEmployee(this.employeeForm.getRawValue(), this.data.id)
+        .updateEmployee(this.employeeForm.getRawValue(), this.data._id)
         .subscribe({
           next: () => {
             this.toastr.success('Employee has been updated!', 'Success!');
